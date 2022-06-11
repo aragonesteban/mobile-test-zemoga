@@ -15,7 +15,7 @@ class PostsRepositoryImpl(private val remotePosts: RemotePosts) : PostsRepositor
         }
     }
 
-    override suspend fun getPostById(postId: Int, userId: Int): ZemogaResult<PostItem> {
+    override suspend fun getPostById(postId: Int): ZemogaResult<PostItem> {
         return withContext(Dispatchers.IO) {
             remotePosts.getPostById(postId)
         }

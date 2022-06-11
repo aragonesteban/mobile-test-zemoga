@@ -6,12 +6,11 @@ import com.zemoga.data.remote.REMOTE_USERS
 import com.zemoga.domain.repository.CommentsRepository
 import com.zemoga.domain.repository.PostsRepository
 import com.zemoga.domain.repository.UsersRepository
+import com.zemoga.domain.usecases.COMMENTS_REPOSITORY
+import com.zemoga.domain.usecases.POSTS_REPOSITORY
+import com.zemoga.domain.usecases.USERS_REPOSITORY
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
-
-const val POSTS_REPOSITORY = "PostsRepository"
-const val USERS_REPOSITORY = "UsersRepository"
-const val COMMENTS_REPOSITORY = "CommentsRepository"
 
 val repositoryModule = module {
 

@@ -33,13 +33,16 @@ android {
 
     tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
         kotlinOptions {
-            jvmTarget = JavaVersion.VERSION_1_8.majorVersion
+            jvmTarget = "1.8"
         }
     }
 }
 
 dependencies {
+    //  Modules
     implementation(project(":data"))
+    implementation(project(":domain"))
+
     // Koin
     implementation(Koin.core)
     implementation(Koin.android)
