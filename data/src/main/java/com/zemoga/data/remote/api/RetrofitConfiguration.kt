@@ -53,3 +53,13 @@ internal inline fun <T : Any> executeRetrofitRequest(block: () -> Response<T>): 
         ZemogaResult.Error(exception.toString())
     }
 }
+
+fun <Api : Any, Data : Any> handleResultRetrofit(
+    result: ZemogaResult<Api>,
+    onSuccess: (Api) -> Data
+): ZemogaResult<Data> {
+    return when (result) {
+        is ZemogaResult.Success -> ZemogaResult.Success(onSuccess.invoke(result.data))
+        is ZemogaResult.Error -> result
+    }
+}

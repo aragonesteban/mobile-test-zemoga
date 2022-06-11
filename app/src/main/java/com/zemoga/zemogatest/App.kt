@@ -2,6 +2,7 @@ package com.zemoga.zemogatest
 
 import android.app.Application
 import com.zemoga.data.remote.remoteModule
+import com.zemoga.data.repository.repositoryModule
 import org.koin.core.context.startKoin
 
 class App : Application() {
@@ -15,7 +16,8 @@ class App : Application() {
         startKoin {
             modules(
                 listOf(
-                    remoteModule
+                    remoteModule,
+                    repositoryModule
                 )
             )
         }

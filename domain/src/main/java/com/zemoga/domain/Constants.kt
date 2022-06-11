@@ -1,4 +1,3 @@
 package com.zemoga.domain
 
-class MyClass {
-}
+const val DEFAULT_INT = 0
