@@ -1,13 +1,13 @@
 plugins {
-    id(BuildPlugins.androidApplication)
-    id(BuildPlugins.kotlin)
+    id("com.android.application")
+    id("org.jetbrains.kotlin.android")
 }
 
 android {
     compileSdk = App.compileSdkVersion
     buildToolsVersion = App.buildToolsVersion
     defaultConfig {
-        applicationId = App.applicationId
+        applicationId = "com.zemoga.zemogatest"
         minSdk = App.minSdkVersion
         targetSdk = App.targetSdkVersion
         versionCode = App.versionCode
@@ -39,6 +39,11 @@ android {
 }
 
 dependencies {
+    implementation(project(":data"))
+    // Koin
+    implementation(Koin.core)
+    implementation(Koin.android)
+
     implementation(AndroidX.core.ktx)
     implementation(AndroidX.appCompat)
     implementation(AndroidX.constraintLayout)

@@ -17,3 +17,5 @@ plugins {
 }
 rootProject.name = "zemogatest"
 include(":app")
+include(":data")
+include(":domain")
