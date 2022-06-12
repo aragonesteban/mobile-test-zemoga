@@ -1,6 +1,8 @@
 package com.zemoga.data.remote.api
 
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
+import com.localebro.okhttpprofiler.OkHttpProfilerInterceptor
+import com.zemoga.data.BuildConfig
 import com.zemoga.domain.ZemogaResult
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
@@ -26,13 +28,18 @@ fun buildRetrofit(baseUrl: String): Retrofit {
         .build()
 }
 
-fun provideHttpclient(): OkHttpClient = OkHttpClient()
-    .newBuilder()
-    .connectTimeout(1, TimeUnit.MINUTES)
-    .readTimeout(1, TimeUnit.MINUTES)
-    .writeTimeout(1, TimeUnit.MINUTES)
-    .addInterceptor(logging())
-    .build()
+fun provideHttpclient(): OkHttpClient {
+    val builder = OkHttpClient().newBuilder()
+    if (BuildConfig.DEBUG) {
+        builder.addInterceptor(OkHttpProfilerInterceptor())
+    }
+    return builder
+        .connectTimeout(1, TimeUnit.MINUTES)
+        .readTimeout(1, TimeUnit.MINUTES)
+        .writeTimeout(1, TimeUnit.MINUTES)
+        .addInterceptor(logging())
+        .build()
+}
 
 internal inline fun <T : Any> executeRetrofitRequest(block: () -> Response<T>): ZemogaResult<T> {
     return try {

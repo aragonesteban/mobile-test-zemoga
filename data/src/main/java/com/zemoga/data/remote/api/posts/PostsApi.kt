@@ -11,10 +11,10 @@ internal const val POST_ID = "postId"
 interface PostsApi {
 
     @GET("$POSTS_SLUG/")
-    fun getPostsList(): Response<List<PostsResponse>>
+    suspend fun getPostsList(): Response<List<PostsResponse>>
 
     @GET("$POSTS_SLUG/{$POST_ID}")
-    fun getPostById(@Path(POST_ID) postId: Int): Response<PostsResponse>
+    suspend fun getPostById(@Path(POST_ID) postId: Int): Response<PostsResponse>
 
     companion object {
         fun buildPostsApi(retrofit: Retrofit): PostsApi = retrofit.create(PostsApi::class.java)

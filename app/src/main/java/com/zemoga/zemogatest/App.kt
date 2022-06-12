@@ -4,6 +4,7 @@ import android.app.Application
 import com.zemoga.data.remote.remoteModule
 import com.zemoga.data.repository.repositoryModule
 import com.zemoga.domain.usecases.useCasesModule
+import com.zemoga.posts.postsModule
 import org.koin.core.context.startKoin
 
 class App : Application() {
@@ -19,7 +20,8 @@ class App : Application() {
                 listOf(
                     remoteModule,
                     repositoryModule,
-                    useCasesModule
+                    useCasesModule,
+                    postsModule
                 )
             )
         }

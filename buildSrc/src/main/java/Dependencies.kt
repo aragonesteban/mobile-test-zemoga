@@ -8,4 +8,8 @@ object Libs {
         const val androidGradleVersion = "7.2.1"
     }
 
+    object OkHttp {
+        const val profiler = "com.localebro:okhttpprofiler:1.0.8"
+    }
+
 }

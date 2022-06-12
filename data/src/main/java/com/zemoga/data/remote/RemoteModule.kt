@@ -4,8 +4,11 @@ import com.zemoga.data.remote.api.buildRetrofit
 import com.zemoga.data.remote.api.comments.CommentsApi
 import com.zemoga.data.remote.api.posts.PostsApi
 import com.zemoga.data.remote.api.users.UsersApi
+import com.zemoga.data.remote.comments.RemoteComments
 import com.zemoga.data.remote.comments.RemoteCommentsImpl
+import com.zemoga.data.remote.posts.RemotePosts
 import com.zemoga.data.remote.posts.RemotePostsImpl
+import com.zemoga.data.remote.users.RemoteUsers
 import com.zemoga.data.remote.users.RemoteUsersImpl
 import kotlinx.serialization.ExperimentalSerializationApi
 import org.koin.core.qualifier.named
@@ -41,15 +44,15 @@ val remoteModule = module {
         CommentsApi.buildCommentsApi(retrofit = get(named(ZEMOGA_RETROFIT)))
     }
 
-    factory(named(REMOTE_POSTS)) {
+    factory<RemotePosts>(named(REMOTE_POSTS)) {
         RemotePostsImpl(postsApi = get(named(POSTS_API)))
     }
 
-    factory(named(REMOTE_USERS)) {
+    factory<RemoteUsers>(named(REMOTE_USERS)) {
         RemoteUsersImpl(usersApi = get(named(USERS_API)))
     }
 
-    factory(named(REMOTE_COMMENTS)) {
+    factory<RemoteComments>(named(REMOTE_COMMENTS)) {
         RemoteCommentsImpl(commentsApi = get(named(COMMENTS_API)))
     }
 }

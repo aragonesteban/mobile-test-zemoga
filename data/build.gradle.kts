@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    compileSdk = 32
+    compileSdk = App.compileSdkVersion
 
     defaultConfig {
-        minSdk = 21
-        targetSdk = 32
+        minSdk = App.minSdkVersion
+        targetSdk = App.targetSdkVersion
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -43,6 +43,7 @@ dependencies {
     implementation(Square.retrofit2.retrofit)
     implementation(Square.okHttp3.okHttp)
     implementation(Square.okHttp3.loggingInterceptor)
+    implementation(Libs.OkHttp.profiler)
 
     // Kotlin Serialization
     implementation(JakeWharton.retrofit2.converter.kotlinxSerialization)
