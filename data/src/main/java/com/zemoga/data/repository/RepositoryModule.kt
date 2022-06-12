@@ -1,5 +1,7 @@
 package com.zemoga.data.repository
 
+import com.zemoga.data.local.LOCAL_POSTS
+import com.zemoga.data.local.POSTS_DAO
 import com.zemoga.data.remote.REMOTE_COMMENTS
 import com.zemoga.data.remote.REMOTE_POSTS
 import com.zemoga.data.remote.REMOTE_USERS
@@ -15,7 +17,10 @@ import org.koin.dsl.module
 val repositoryModule = module {
 
     factory<PostsRepository>(named(POSTS_REPOSITORY)) {
-        PostsRepositoryImpl(get(named(REMOTE_POSTS)))
+        PostsRepositoryImpl(
+            get(named(LOCAL_POSTS)),
+            get(named(REMOTE_POSTS))
+        )
     }
 
     factory<UsersRepository>(named(USERS_REPOSITORY)) {

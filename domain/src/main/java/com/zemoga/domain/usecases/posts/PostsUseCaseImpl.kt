@@ -14,4 +14,8 @@ class PostsUseCaseImpl(private val postsRepository: PostsRepository) : PostsUseC
         return postsRepository.getPostById(postId)
     }
 
+    override suspend fun deleteAllPost() {
+        postsRepository.deleteAllPost()
+    }
+
 }

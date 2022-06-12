@@ -15,6 +15,7 @@ class PostsViewModel(private val postsUseCase: PostsUseCase) : ViewModel() {
 
     fun getAllPosts() {
         viewModelScope.launch {
+            _viewState.value = PostsUiState.Loading
             _viewState.value = when (val result = postsUseCase.getPostsList()) {
                 is ZemogaResult.Success -> PostsUiState.ShowAllPosts(result.data)
                 is ZemogaResult.Error -> PostsUiState.Error
@@ -24,6 +25,13 @@ class PostsViewModel(private val postsUseCase: PostsUseCase) : ViewModel() {
 
     fun getFavoritesPosts() {
 
+    }
+
+    fun deleteAllPosts() {
+        viewModelScope.launch {
+            postsUseCase.deleteAllPost()
+            _viewState.value = PostsUiState.ShowEmptyPosts
+        }
     }
 
 }

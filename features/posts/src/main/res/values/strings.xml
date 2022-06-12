@@ -3,4 +3,10 @@
     <string name="label_posts">Posts</string>
     <string name="label_all_posts">All</string>
     <string name="label_favorites_posts">Favorites</string>
+    <string name="label_delete_all_posts">Delete All Posts</string>
+    <string name="label_description_delete_all_posts">Are you sure you want to delete all posts?</string>
+    <string name="label_all_posts_deleted">All posts deleted</string>
+    <string name="btn_accept">Accept</string>
+    <string name="btn_cancel">Cancel</string>
+    <string name="label_empty_posts">There are not posts to show ☹️</string>
 </resources>

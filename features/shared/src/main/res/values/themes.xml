@@ -22,4 +22,27 @@
         <item name="colorControlNormal">@color/white</item>
     </style>
 
+    <style name="Theme.Zemoga.AlertDialog" parent="Theme.MaterialComponents.Light.Dialog.Alert">
+        <item name="colorControlActivated">@color/primary</item>
+        <item name="buttonBarPositiveButtonStyle">
+            @style/Theme.Zemoga.AlertDialog.Button.Positive
+        </item>
+        <item name="buttonBarNegativeButtonStyle">
+            @style/Theme.Zemoga.AlertDialog.Button.Negative
+        </item>
+        <item name="android:textColor">@color/grey_700</item>
+        <item name="android:textColorPrimary">@color/grey_700</item>
+        <item name="android:background">@color/white</item>
+    </style>
+
+    <style name="Theme.Zemoga.AlertDialog.Button.Positive" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="backgroundTint">@android:color/transparent</item>
+        <item name="android:textColor">@color/primary</item>
+    </style>
+
+    <style name="Theme.Zemoga.AlertDialog.Button.Negative" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="backgroundTint">@android:color/transparent</item>
+        <item name="android:textColor">@color/error</item>
+    </style>
+
 </resources>

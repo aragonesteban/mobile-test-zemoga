@@ -31,11 +31,11 @@
 
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/posts_tabs"
-                app:tabTextColor="@color/white"
-                app:tabIndicatorColor="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimen_60"
                 android:background="@color/primary"
+                app:tabIndicatorColor="@color/white"
+                app:tabTextColor="@color/white"
                 tools:ignore="UnusedAttribute" />
 
         </com.google.android.material.appbar.AppBarLayout>

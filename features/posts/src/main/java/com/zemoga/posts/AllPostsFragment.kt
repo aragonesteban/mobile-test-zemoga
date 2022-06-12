@@ -16,12 +16,12 @@ import com.zemoga.posts.databinding.FragmentAllPostsBinding
 import com.zemoga.shared.extensions.toggleVisibility
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.core.qualifier.named
 
 class AllPostsFragment : Fragment() {
 
-    private val postsViewModel: PostsViewModel by viewModel(named(POSTS_VIEW_MODEL))
+    private val postsViewModel: PostsViewModel by sharedViewModel(named(POSTS_VIEW_MODEL))
 
     private var _binding: FragmentAllPostsBinding? = null
     private val binding get() = _binding!!
@@ -59,7 +59,7 @@ class AllPostsFragment : Fragment() {
         when (viewState) {
             PostsUiState.Loading -> binding.allPostsLoading.toggleVisibility(show = true)
             is PostsUiState.ShowAllPosts -> setDataPostsList(viewState.data)
-            is PostsUiState.ShowFavoritesPosts -> TODO()
+            PostsUiState.ShowEmptyPosts -> showEmptyPosts()
             PostsUiState.Error -> showErrorFeedback()
         }
     }
@@ -67,9 +67,18 @@ class AllPostsFragment : Fragment() {
     private fun setDataPostsList(value: List<PostItem>) {
         binding.apply {
             allPostsLoading.toggleVisibility(show = false)
+            labelEmptyPosts.toggleVisibility(show = false)
             postsList.toggleVisibility(show = true)
         }
         postsAdapter.setPostsList(value)
+    }
+
+    private fun showEmptyPosts() {
+        postsAdapter.setPostsList(listOf())
+        binding.apply {
+            postsList.toggleVisibility(show = false)
+            labelEmptyPosts.toggleVisibility(show = true)
+        }
     }
 
     private fun showErrorFeedback() {

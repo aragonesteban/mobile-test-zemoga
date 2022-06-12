@@ -53,6 +53,7 @@ dependencies {
     // Room
     implementation(AndroidX.room.ktx)
     implementation(AndroidX.room.runtime)
+    annotationProcessor(AndroidX.room.compiler)
     kapt(AndroidX.room.compiler)
 
     // Koin

@@ -6,4 +6,5 @@ import com.zemoga.domain.model.PostItem
 interface PostsUseCase {
     suspend fun getPostsList(): ZemogaResult<List<PostItem>>
     suspend fun getPostById(postId: Int): ZemogaResult<PostItem>
+    suspend fun deleteAllPost()
 }
