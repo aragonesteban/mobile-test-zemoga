@@ -6,6 +6,7 @@ object Libs {
 
     object Android {
         const val androidGradleVersion = "7.2.1"
+        const val archCoreTesting = "android.arch.core:core-testing:1.1.1"
     }
 
     object OkHttp {

@@ -49,7 +49,10 @@ dependencies {
     implementation(Koin.android)
     implementation(AndroidX.Lifecycle.runtimeKtx)
 
+    testImplementation(Libs.Android.archCoreTesting)
     testImplementation(Testing.junit4)
-    androidTestImplementation(AndroidX.test.ext.junit)
-    androidTestImplementation(AndroidX.test.espresso.core)
+    testImplementation(Testing.Mockito.kotlin)
+    testImplementation(Testing.Mockito.inline)
+    testImplementation(Kotlin.test.testng)
+    testImplementation(KotlinX.coroutines.test)
 }

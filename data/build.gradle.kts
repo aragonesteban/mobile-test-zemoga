@@ -59,4 +59,18 @@ dependencies {
     // Koin
     implementation(Koin.core)
     implementation(Koin.android)
+
+    testImplementation(Libs.Android.archCoreTesting)
+    testImplementation(AndroidX.room.testing)
+    testImplementation(Testing.junit4)
+    testImplementation(Testing.Mockito.kotlin)
+    testImplementation(Testing.Mockito.inline)
+    testImplementation(Kotlin.test.testng)
+    testImplementation(KotlinX.coroutines.test)
+    androidTestImplementation(AndroidX.test.ext.junit)
+    androidTestImplementation(Kotlin.test.testng)
+    androidTestImplementation(AndroidX.test.espresso.core)
+    androidTestImplementation(AndroidX.test.rules)
+    androidTestImplementation(AndroidX.test.runner)
+    androidTestImplementation(AndroidX.test.coreKtx)
 }

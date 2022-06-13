@@ -11,11 +11,12 @@ import kotlinx.coroutines.launch
 
 class PostsViewModel(private val postsUseCase: PostsUseCase) : ViewModel() {
 
-    private val _uiStateAllPosts = MutableStateFlow<PostsUiState>(PostsUiState.Loading)
-    val uiStateAllPosts: StateFlow<PostsUiState> = _uiStateAllPosts
+    private val _uiStateAllPosts = MutableStateFlow<AllPostsUiState>(AllPostsUiState.Loading)
+    val uiStateAllPosts: StateFlow<AllPostsUiState> = _uiStateAllPosts
 
-    private val _uiStateFavoritesPosts = MutableStateFlow<PostsUiState>(PostsUiState.Loading)
-    val uiFavoritePosts: StateFlow<PostsUiState> = _uiStateFavoritesPosts
+    private val _uiStateFavoritesPosts =
+        MutableStateFlow<FavoritesPostsUiState>(FavoritesPostsUiState.Loading)
+    val uiFavoritePosts: StateFlow<FavoritesPostsUiState> = _uiStateFavoritesPosts
 
     private var _postsDeleted = false
 
@@ -23,14 +24,14 @@ class PostsViewModel(private val postsUseCase: PostsUseCase) : ViewModel() {
         if (loadPostsFromApi) _postsDeleted = false
         if (_postsDeleted.not()) {
             viewModelScope.launch {
-                _uiStateAllPosts.value = PostsUiState.Loading
+                _uiStateAllPosts.value = AllPostsUiState.Loading
                 _uiStateAllPosts.value =
                     when (val result = postsUseCase.getPostsList(loadPostsFromApi)) {
                         is ZemogaResult.Success -> {
                             getFavoritesPosts(result.data)
-                            PostsUiState.ShowAllPosts(result.data)
+                            AllPostsUiState.ShowAllPosts(result.data)
                         }
-                        is ZemogaResult.Error -> PostsUiState.Error
+                        is ZemogaResult.Error -> AllPostsUiState.Error
                     }
             }
         }
@@ -39,9 +40,9 @@ class PostsViewModel(private val postsUseCase: PostsUseCase) : ViewModel() {
     private fun getFavoritesPosts(postsList: List<PostItem>) {
         val favoritesPostsList = postsUseCase.filterFavoritePostsList(postsList)
         _uiStateFavoritesPosts.value = if (favoritesPostsList.isNotEmpty()) {
-            PostsUiState.ShowFavoritesPosts(favoritesPostsList)
+            FavoritesPostsUiState.ShowFavoritesPosts(favoritesPostsList)
         } else {
-            PostsUiState.ShowEmptyFavoritesPosts
+            FavoritesPostsUiState.ShowEmptyFavoritesPosts
         }
     }
 
@@ -49,8 +50,8 @@ class PostsViewModel(private val postsUseCase: PostsUseCase) : ViewModel() {
         viewModelScope.launch {
             _postsDeleted = true
             postsUseCase.deleteAllPost()
-            _uiStateAllPosts.value = PostsUiState.ShowEmptyPosts
-            _uiStateFavoritesPosts.value = PostsUiState.ShowEmptyFavoritesPosts
+            _uiStateAllPosts.value = AllPostsUiState.ShowEmptyPosts
+            _uiStateFavoritesPosts.value = FavoritesPostsUiState.ShowEmptyFavoritesPosts
         }
     }
 

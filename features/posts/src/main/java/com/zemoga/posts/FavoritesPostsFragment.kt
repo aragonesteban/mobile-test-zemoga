@@ -59,13 +59,13 @@ class FavoritesPostsFragment : Fragment() {
         }
     }
 
-    private fun handleViewState(viewState: PostsUiState) {
+    private fun handleViewState(viewState: FavoritesPostsUiState) {
         binding.apply {
             when (viewState) {
-                PostsUiState.Loading -> favoritesPostsLoading.toggleVisibility(show = true)
-                is PostsUiState.ShowFavoritesPosts -> setDataFavoritesPostsList(viewState.data)
-                PostsUiState.ShowEmptyFavoritesPosts -> showEmptyFavoritesPosts()
-                PostsUiState.Error -> showErrorFeedback()
+                FavoritesPostsUiState.Loading -> favoritesPostsLoading.toggleVisibility(show = true)
+                is FavoritesPostsUiState.ShowFavoritesPosts -> setDataFavoritesPostsList(viewState.data)
+                FavoritesPostsUiState.ShowEmptyFavoritesPosts -> showEmptyFavoritesPosts()
+                FavoritesPostsUiState.Error -> showErrorFeedback()
             }
         }
     }

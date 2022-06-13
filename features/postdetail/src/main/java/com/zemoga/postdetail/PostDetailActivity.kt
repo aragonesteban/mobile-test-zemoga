@@ -47,7 +47,7 @@ class PostDetailActivity : AppCompatActivity() {
         }
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                postDetailViewModel.viewState.collect(::handleViewState)
+                postDetailViewModel.uiState.collect(::handleViewState)
             }
         }
     }

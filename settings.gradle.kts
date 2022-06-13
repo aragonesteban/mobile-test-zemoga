@@ -18,7 +18,7 @@ plugins {
 rootProject.name = "zemogatest"
 include(":app")
 include(":data")
-include(":domain")
 include(":features:posts")
 include(":features:shared")
 include(":features:postdetail")
+include(":domain")

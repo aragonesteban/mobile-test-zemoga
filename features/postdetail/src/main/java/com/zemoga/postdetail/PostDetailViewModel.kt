@@ -17,16 +17,16 @@ class PostDetailViewModel(
     private val commentsUseCase: CommentsUseCase
 ) : ViewModel() {
 
-    private val _viewState =
+    private val _uiState =
         MutableStateFlow<PostDetailUiState>(PostDetailUiState.LoadingPostDetail)
-    val viewState: StateFlow<PostDetailUiState> = _viewState
+    val uiState: StateFlow<PostDetailUiState> = _uiState
 
     private var _postDetail: PostItem? = null
 
     fun getPostById(postId: Int) {
         viewModelScope.launch {
-            _viewState.value = PostDetailUiState.LoadingPostDetail
-            _viewState.value = when (val result = postsUseCase.getPostById(postId)) {
+            _uiState.value = PostDetailUiState.LoadingPostDetail
+            _uiState.value = when (val result = postsUseCase.getPostById(postId)) {
                 is ZemogaResult.Success -> {
                     _postDetail = result.data
                     PostDetailUiState.ShowPostDetail(result.data)
@@ -38,8 +38,8 @@ class PostDetailViewModel(
 
     fun getUserById(userId: Int) {
         viewModelScope.launch {
-            _viewState.value = PostDetailUiState.LoadingUserInfo
-            _viewState.value = when (val result = usersUseCase.getUserById(userId)) {
+            _uiState.value = PostDetailUiState.LoadingUserInfo
+            _uiState.value = when (val result = usersUseCase.getUserById(userId)) {
                 is ZemogaResult.Success -> PostDetailUiState.ShowUserInfo(result.data)
                 is ZemogaResult.Error -> PostDetailUiState.Error
             }
@@ -48,8 +48,8 @@ class PostDetailViewModel(
 
     fun getCommentsByPostId(postId: Int) {
         viewModelScope.launch {
-            _viewState.value = PostDetailUiState.LoadingComments
-            _viewState.value = when (val result = commentsUseCase.getCommentsByPostId(postId)) {
+            _uiState.value = PostDetailUiState.LoadingComments
+            _uiState.value = when (val result = commentsUseCase.getCommentsByPostId(postId)) {
                 is ZemogaResult.Success -> PostDetailUiState.ShowPostComments(result.data)
                 is ZemogaResult.Error -> PostDetailUiState.Error
             }
@@ -61,7 +61,7 @@ class PostDetailViewModel(
             _postDetail?.let { post ->
                 post.isFavorite = post.isFavorite.not()
                 postsUseCase.updatePost(post)
-                _viewState.value = PostDetailUiState.ToggleFavoriteStar(post.isFavorite)
+                _uiState.value = PostDetailUiState.ToggleFavoriteStar(post.isFavorite)
             }
         }
     }
@@ -70,7 +70,7 @@ class PostDetailViewModel(
         viewModelScope.launch {
             _postDetail?.let { post ->
                 postsUseCase.deletePost(post.id)
-                _viewState.value = PostDetailUiState.ShowMessagePostDeleted
+                _uiState.value = PostDetailUiState.ShowMessagePostDeleted
             }
         }
     }

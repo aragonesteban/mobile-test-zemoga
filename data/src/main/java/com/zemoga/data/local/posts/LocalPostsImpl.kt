@@ -31,11 +31,6 @@ class LocalPostsImpl(
         postsDao.insertAllPosts(postsEntities)
     }
 
-    override fun updateAllPosts(postsList: List<PostItem>) {
-        val postsEntities = transformToPostEntityList(postsList)
-        postsDao.updateAllPosts(postsEntities)
-    }
-
     override fun updatePost(postItem: PostItem) {
         val postEntity = PostEntity(
             id = postItem.id,

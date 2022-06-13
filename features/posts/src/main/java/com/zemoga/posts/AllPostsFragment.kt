@@ -59,16 +59,16 @@ class AllPostsFragment : Fragment() {
         }
     }
 
-    private fun handleViewState(viewState: PostsUiState) {
+    private fun handleViewState(viewState: AllPostsUiState) {
         binding.apply {
             when (viewState) {
-                PostsUiState.Loading -> {
+                AllPostsUiState.Loading -> {
                     labelEmptyPosts.toggleVisibility(show = false)
                     allPostsLoading.toggleVisibility(show = true)
                 }
-                is PostsUiState.ShowAllPosts -> setDataPostsList(viewState.data)
-                PostsUiState.ShowEmptyPosts -> showEmptyPosts()
-                PostsUiState.Error -> showErrorFeedback()
+                is AllPostsUiState.ShowAllPosts -> setDataPostsList(viewState.data)
+                AllPostsUiState.ShowEmptyPosts -> showEmptyPosts()
+                AllPostsUiState.Error -> showErrorFeedback()
             }
         }
     }
