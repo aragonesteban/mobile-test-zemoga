@@ -1,0 +1,48 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.Zemoga" parent="Theme.MaterialComponents.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryVariant">@color/primary_light</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/secondary</item>
+        <item name="colorSecondaryVariant">@color/secondary_light</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimary</item>
+        <item name="android:colorBackground" tools:targetApi="l">?attr/colorPrimary</item>
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="Theme.Zemoga.ToolbarTitleWhite" parent="@style/Widget.MaterialComponents.ActionBar.Primary">
+        <item name="android:background">@color/primary</item>
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:textColorSecondary">@color/white</item>
+        <item name="colorControlNormal">@color/white</item>
+    </style>
+
+    <style name="Theme.Zemoga.AlertDialog" parent="Theme.MaterialComponents.Light.Dialog.Alert">
+        <item name="colorControlActivated">@color/primary</item>
+        <item name="buttonBarPositiveButtonStyle">
+            @style/Theme.Zemoga.AlertDialog.Button.Positive
+        </item>
+        <item name="buttonBarNegativeButtonStyle">
+            @style/Theme.Zemoga.AlertDialog.Button.Negative
+        </item>
+        <item name="android:textColor">@color/grey_700</item>
+        <item name="android:textColorPrimary">@color/grey_700</item>
+        <item name="android:background">@color/white</item>
+    </style>
+
+    <style name="Theme.Zemoga.AlertDialog.Button.Positive" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="backgroundTint">@android:color/transparent</item>
+        <item name="android:textColor">@color/primary</item>
+    </style>
+
+    <style name="Theme.Zemoga.AlertDialog.Button.Negative" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="backgroundTint">@android:color/transparent</item>
+        <item name="android:textColor">@color/error</item>
+    </style>
+
+</resources>

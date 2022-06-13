@@ -1,13 +1,13 @@
 plugins {
-    id(BuildPlugins.androidApplication)
-    id(BuildPlugins.kotlin)
+    id("com.android.application")
+    id("org.jetbrains.kotlin.android")
 }
 
 android {
     compileSdk = App.compileSdkVersion
     buildToolsVersion = App.buildToolsVersion
     defaultConfig {
-        applicationId = App.applicationId
+        applicationId = "com.zemoga.zemogatest"
         minSdk = App.minSdkVersion
         targetSdk = App.targetSdkVersion
         versionCode = App.versionCode
@@ -33,12 +33,22 @@ android {
 
     tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
         kotlinOptions {
-            jvmTarget = JavaVersion.VERSION_1_8.majorVersion
+            jvmTarget = "1.8"
         }
     }
 }
 
 dependencies {
+    //  Modules
+    implementation(project(":features:postdetail"))
+    implementation(project(":features:posts"))
+    implementation(project(":data"))
+    implementation(project(":domain"))
+
+    // Koin
+    implementation(Koin.core)
+    implementation(Koin.android)
+
     implementation(AndroidX.core.ktx)
     implementation(AndroidX.appCompat)
     implementation(AndroidX.constraintLayout)

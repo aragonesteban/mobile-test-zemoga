@@ -1,9 +1,3 @@
-object BuildPlugins {
-    const val androidApplication = "com.android.application"
-    const val androidLibrary = "com.android.library"
-    const val kotlin = "org.jetbrains.kotlin.android"
-}
-
 object Libs {
 
     object Kotlin {
@@ -12,6 +6,11 @@ object Libs {
 
     object Android {
         const val androidGradleVersion = "7.2.1"
+        const val archCoreTesting = "android.arch.core:core-testing:1.1.1"
+    }
+
+    object OkHttp {
+        const val profiler = "com.localebro:okhttpprofiler:1.0.8"
     }
 
 }
