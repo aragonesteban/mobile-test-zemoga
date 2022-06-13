@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="btn_accept">Accept</string>
+    <string name="btn_cancel">Cancel</string>
     <string name="label_error">An error has occurred, please try again</string>
 </resources>

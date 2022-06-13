@@ -27,7 +27,36 @@ class LocalPostsImpl(
     }
 
     override fun insertAllPosts(postsList: List<PostItem>) {
-        val postsEntities = postsList.map { post ->
+        val postsEntities = transformToPostEntityList(postsList)
+        postsDao.insertAllPosts(postsEntities)
+    }
+
+    override fun updateAllPosts(postsList: List<PostItem>) {
+        val postsEntities = transformToPostEntityList(postsList)
+        postsDao.updateAllPosts(postsEntities)
+    }
+
+    override fun updatePost(postItem: PostItem) {
+        val postEntity = PostEntity(
+            id = postItem.id,
+            userId = postItem.userId,
+            title = postItem.title,
+            body = postItem.body,
+            isFavorite = postItem.isFavorite,
+        )
+        postsDao.updatePost(postEntity)
+    }
+
+    override fun deletePost(postId: Int) {
+        postsDao.deletePost(postId)
+    }
+
+    override fun deleteAllPosts() {
+        postsDao.deleteAllPosts()
+    }
+
+    private fun transformToPostEntityList(postsList: List<PostItem>): List<PostEntity> {
+        return postsList.map { post ->
             PostEntity(
                 id = post.id,
                 userId = post.userId,
@@ -36,11 +65,6 @@ class LocalPostsImpl(
                 isFavorite = post.isFavorite,
             )
         }
-        postsDao.insertAllPosts(postsEntities)
-    }
-
-    override fun deleteAllPosts() {
-        postsDao.deleteAllPosts()
     }
 
 }

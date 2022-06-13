@@ -7,5 +7,6 @@ sealed interface PostsUiState {
     data class ShowAllPosts(val data: List<PostItem>) : PostsUiState
     object ShowEmptyPosts : PostsUiState
     data class ShowFavoritesPosts(val data: List<PostItem>) : PostsUiState
+    object ShowEmptyFavoritesPosts : PostsUiState
     object Error : PostsUiState
 }

@@ -6,4 +6,9 @@
     <string name="label_title_website">Website</string>
     <string name="label_title_comments">Comments</string>
     <string name="label_add_to_favorites">Add to favorites</string>
+    <string name="label_message_add_to_favorites">Post added to favorites</string>
+    <string name="label_message_delete_to_favorites">Post deleted from favorites</string>
+    <string name="label_title_delete_post">Delete Post</string>
+    <string name="label_message_delete_post">Are you sure you want delete the post?</string>
+    <string name="label_message_post_deleted">Post has been deleted</string>
 </resources>

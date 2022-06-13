@@ -3,15 +3,17 @@ package com.zemoga.posts
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.tabs.TabLayoutMediator
 import com.zemoga.posts.databinding.ActivityPostsBinding
+import com.zemoga.shared.R.style
 import com.zemoga.shared.ViewPagerAdapter
+import com.zemoga.shared.extensions.isOnline
+import com.zemoga.shared.extensions.showMessage
+import com.zemoga.shared.extensions.toggleVisibility
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.qualifier.named
-import com.zemoga.shared.R.style
 
 private const val ALL_POSTS_TAB_INDEX = 0
 private const val FAVORITES_POSTS_TAB_INDEX = 1
@@ -26,9 +28,18 @@ class PostsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityPostsBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         setUpToolbar()
         handleClickListeners()
         setUpTabs()
+        binding.postsDelete.toggleVisibility(show = isOnline())
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (isOnline()) {
+            postsViewModel.getAllPosts()
+        }
     }
 
     private fun setUpToolbar() {
@@ -44,7 +55,9 @@ class PostsActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_reload -> {
-                postsViewModel.getAllPosts()
+                if (isOnline()) {
+                    postsViewModel.getAllPosts(loadPostsFromApi = true)
+                }
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -84,19 +97,15 @@ class PostsActivity : AppCompatActivity() {
 
         builder.setTitle(getString(R.string.label_delete_all_posts))
         builder.setMessage(getString(R.string.label_description_delete_all_posts))
-        builder.setPositiveButton(R.string.btn_accept) { _, _ -> deleteAllPosts() }
-        builder.setNegativeButton(R.string.btn_cancel, null)
+        builder.setPositiveButton(com.zemoga.shared.R.string.btn_accept) { _, _ -> deleteAllPosts() }
+        builder.setNegativeButton(com.zemoga.shared.R.string.btn_cancel, null)
 
         builder.create().show()
     }
 
     private fun deleteAllPosts() {
         postsViewModel.deleteAllPosts()
-        Toast.makeText(
-            this,
-            getString(R.string.label_all_posts_deleted),
-            Toast.LENGTH_LONG
-        ).show()
+        binding.root.showMessage(getString(R.string.label_all_posts_deleted))
     }
 
 }

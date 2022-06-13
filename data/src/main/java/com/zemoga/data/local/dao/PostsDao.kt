@@ -6,8 +6,11 @@ import com.zemoga.domain.model.PostItem
 
 @Dao
 interface PostsDao {
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertAllPosts(postsList: List<PostEntity>)
+
+    @Update
+    fun updateAllPosts(postsList: List<PostEntity>)
 
     @Update
     fun updatePost(postItem: PostEntity)
@@ -17,6 +20,9 @@ interface PostsDao {
 
     @Query("SELECT * FROM posts WHERE id = :postId")
     fun getPostById(postId: Int): PostEntity?
+
+    @Query("DELETE FROM posts WHERE id = :postId")
+    fun deletePost(postId: Int)
 
     @Query("DELETE FROM posts")
     fun deleteAllPosts()

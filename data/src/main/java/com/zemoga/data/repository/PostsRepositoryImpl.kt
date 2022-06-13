@@ -13,17 +13,21 @@ class PostsRepositoryImpl(
     private val remotePosts: RemotePosts
 ) : PostsRepository {
 
-    override suspend fun getPostsList(): ZemogaResult<List<PostItem>> {
+    override suspend fun getPostsList(loadPostsFromApi: Boolean): ZemogaResult<List<PostItem>> {
         return withContext(Dispatchers.IO) {
             val postsList = localPosts.getAllPosts()
-            if (postsList.isNotEmpty()) {
+            if (postsList.isNotEmpty() && loadPostsFromApi.not()) {
                 ZemogaResult.Success(postsList)
             } else {
                 val result = remotePosts.getPostsList()
                 if (result is ZemogaResult.Success) {
                     localPosts.insertAllPosts(result.data)
                 }
-                result
+                if (loadPostsFromApi) {
+                    ZemogaResult.Success(localPosts.getAllPosts())
+                } else {
+                    result
+                }
             }
         }
     }
@@ -42,6 +46,18 @@ class PostsRepositoryImpl(
     override suspend fun deleteAllPost() {
         withContext(Dispatchers.IO) {
             localPosts.deleteAllPosts()
+        }
+    }
+
+    override suspend fun updatePost(postItem: PostItem) {
+        withContext(Dispatchers.IO) {
+            localPosts.updatePost(postItem)
+        }
+    }
+
+    override suspend fun deletePost(postId: Int) {
+        withContext(Dispatchers.IO) {
+            localPosts.deletePost(postId)
         }
     }
 

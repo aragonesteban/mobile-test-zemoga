@@ -2,11 +2,10 @@ package com.zemoga.posts
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -15,7 +14,7 @@ import com.zemoga.domain.model.PostItem
 import com.zemoga.posts.adapter.PostsAdapter
 import com.zemoga.posts.databinding.FragmentAllPostsBinding
 import com.zemoga.shared.R
-import com.zemoga.shared.extensions.showToastErrorMessage
+import com.zemoga.shared.extensions.showToastMessage
 import com.zemoga.shared.extensions.toggleVisibility
 import com.zemoga.shared.navigation.goToPostDetail
 import kotlinx.coroutines.flow.collect
@@ -46,10 +45,9 @@ class AllPostsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setUpRecycler()
-        postsViewModel.getAllPosts()
         lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                postsViewModel.viewState.collect(::handleViewState)
+                postsViewModel.uiStateAllPosts.collect(::handleViewState)
             }
         }
     }
@@ -93,7 +91,7 @@ class AllPostsFragment : Fragment() {
     }
 
     private fun showErrorFeedback() {
-        requireContext().showToastErrorMessage(getString(R.string.label_error))
+        requireContext().showToastMessage(getString(R.string.label_error))
     }
 
     override fun onDestroyView() {

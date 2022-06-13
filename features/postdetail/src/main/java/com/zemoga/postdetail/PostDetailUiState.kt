@@ -11,5 +11,7 @@ sealed interface PostDetailUiState {
     data class ShowUserInfo(val data: User) : PostDetailUiState
     object LoadingComments : PostDetailUiState
     data class ShowPostComments(val data: List<CommentItem>) : PostDetailUiState
+    data class ToggleFavoriteStar(val isFavorite: Boolean) : PostDetailUiState
+    object ShowMessagePostDeleted : PostDetailUiState
     object Error : PostDetailUiState
 }
