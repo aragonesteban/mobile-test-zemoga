@@ -1,4 +1,4 @@
-# Mobile Test Zomega
+# Mobile Test Zemoga
 
 ## How it looks
 
