@@ -1,0 +1,9 @@
+<resources>
+    <string name="label_title_user">User</string>
+    <string name="label_title_email">Email</string>
+    <string name="label_title_name">Name</string>
+    <string name="label_title_phone">Phone</string>
+    <string name="label_title_website">Website</string>
+    <string name="label_title_comments">Comments</string>
+    <string name="label_add_to_favorites">Add to favorites</string>
+</resources>

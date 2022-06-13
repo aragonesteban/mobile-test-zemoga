@@ -8,15 +8,22 @@ import com.zemoga.domain.model.PostItem
 class LocalPostsImpl(
     private val postsDao: PostsDao
 ) : LocalPosts {
+
     override fun getAllPosts(): List<PostItem> {
-        val result = postsDao.getAllPosts()
-        return result.transformToPostsList()
+        return postsDao.getAllPosts().transformToPostsList()
     }
 
-    override fun getPostById(postId: Int): PostItem {
-        return PostItem(
-            1, 1, "", "", false
-        )
+    override fun getPostById(postId: Int): PostItem? {
+        val result = postsDao.getPostById(postId)
+        return result?.run {
+            PostItem(
+                id = id,
+                userId = userId,
+                title = title,
+                body = body,
+                isFavorite = isFavorite,
+            )
+        }
     }
 
     override fun insertAllPosts(postsList: List<PostItem>) {
@@ -35,4 +42,5 @@ class LocalPostsImpl(
     override fun deleteAllPosts() {
         postsDao.deleteAllPosts()
     }
+
 }

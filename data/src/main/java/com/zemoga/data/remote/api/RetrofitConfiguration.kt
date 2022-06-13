@@ -21,10 +21,11 @@ fun logging(): HttpLoggingInterceptor = HttpLoggingInterceptor().apply {
 @ExperimentalSerializationApi
 fun buildRetrofit(baseUrl: String): Retrofit {
     val contentType = "application/json".toMediaType()
+    val json = Json { ignoreUnknownKeys = true }
     return Retrofit.Builder()
         .baseUrl(baseUrl)
         .client(provideHttpclient())
-        .addConverterFactory(Json.asConverterFactory(contentType))
+        .addConverterFactory(json.asConverterFactory(contentType))
         .build()
 }
 

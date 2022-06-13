@@ -8,9 +8,10 @@ class PostsViewHolder(
     private val binding: ItemPostBinding
 ) : RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(postItem: PostItem) {
+    fun bind(postItem: PostItem, onPostItemClick: (PostItem) -> Unit) {
         binding.apply {
             postTitle.text = postItem.title
+            root.setOnClickListener { onPostItemClick.invoke(postItem) }
         }
     }
 

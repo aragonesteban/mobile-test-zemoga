@@ -1,5 +1,6 @@
 package com.zemoga.posts
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -13,7 +14,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.zemoga.domain.model.PostItem
 import com.zemoga.posts.adapter.PostsAdapter
 import com.zemoga.posts.databinding.FragmentAllPostsBinding
+import com.zemoga.shared.R
+import com.zemoga.shared.extensions.showToastErrorMessage
 import com.zemoga.shared.extensions.toggleVisibility
+import com.zemoga.shared.navigation.goToPostDetail
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
@@ -26,7 +30,9 @@ class AllPostsFragment : Fragment() {
     private var _binding: FragmentAllPostsBinding? = null
     private val binding get() = _binding!!
 
-    private val postsAdapter = PostsAdapter()
+    private val postsAdapter = PostsAdapter { postItem ->
+        startActivity(Intent().goToPostDetail(requireContext(), postItem.id, postItem.userId))
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,11 +62,16 @@ class AllPostsFragment : Fragment() {
     }
 
     private fun handleViewState(viewState: PostsUiState) {
-        when (viewState) {
-            PostsUiState.Loading -> binding.allPostsLoading.toggleVisibility(show = true)
-            is PostsUiState.ShowAllPosts -> setDataPostsList(viewState.data)
-            PostsUiState.ShowEmptyPosts -> showEmptyPosts()
-            PostsUiState.Error -> showErrorFeedback()
+        binding.apply {
+            when (viewState) {
+                PostsUiState.Loading -> {
+                    labelEmptyPosts.toggleVisibility(show = false)
+                    allPostsLoading.toggleVisibility(show = true)
+                }
+                is PostsUiState.ShowAllPosts -> setDataPostsList(viewState.data)
+                PostsUiState.ShowEmptyPosts -> showEmptyPosts()
+                PostsUiState.Error -> showErrorFeedback()
+            }
         }
     }
 
@@ -82,11 +93,7 @@ class AllPostsFragment : Fragment() {
     }
 
     private fun showErrorFeedback() {
-        Toast.makeText(
-            requireContext(),
-            getString(com.zemoga.shared.R.string.label_error),
-            Toast.LENGTH_LONG
-        ).show()
+        requireContext().showToastErrorMessage(getString(R.string.label_error))
     }
 
     override fun onDestroyView() {

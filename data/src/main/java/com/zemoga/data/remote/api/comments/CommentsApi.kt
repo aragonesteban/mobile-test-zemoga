@@ -11,7 +11,7 @@ private const val COMMENTS_SLUG = "comments"
 interface CommentsApi {
 
     @GET("$COMMENTS_SLUG/")
-    fun getCommentsByPostId(@Query(POST_ID) postId: Int): Response<List<CommentsResponse>>
+    suspend fun getCommentsByPostId(@Query(POST_ID) postId: Int): Response<List<CommentsResponse>>
 
     companion object {
         fun buildCommentsApi(retrofit: Retrofit): CommentsApi =

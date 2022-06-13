@@ -11,7 +11,7 @@ private const val USER_ID = "userId"
 interface UsersApi {
 
     @GET("$USERS_SLUG/{$USER_ID}")
-    fun getUserById(@Path(USER_ID) userId: Int): Response<UsersResponse>
+    suspend fun getUserById(@Path(USER_ID) userId: Int): Response<UsersResponse>
 
     companion object {
         fun buildUsersApi(retrofit: Retrofit): UsersApi = retrofit.create(UsersApi::class.java)

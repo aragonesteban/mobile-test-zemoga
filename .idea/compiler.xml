@@ -7,6 +7,7 @@
       <module name="zemogatest.buildSrc.main" target="11" />
       <module name="zemogatest.buildSrc.test" target="11" />
       <module name="zemogatest.data" target="11" />
+      <module name="zemogatest.features.postdetail" target="11" />
       <module name="zemogatest.features.posts" target="11" />
       <module name="zemogatest.features.shared" target="11" />
     </bytecodeTargetLevel>

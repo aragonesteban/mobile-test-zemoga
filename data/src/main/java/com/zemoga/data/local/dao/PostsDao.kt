@@ -12,12 +12,12 @@ interface PostsDao {
     @Update
     fun updatePost(postItem: PostEntity)
 
-    @Query("SELECT * FROM post_entity")
+    @Query("SELECT * FROM posts")
     fun getAllPosts(): List<PostEntity>
 
-    @Query("SELECT * FROM post_entity WHERE id = :postId")
-    fun getPostById(postId: Int): List<PostEntity>
+    @Query("SELECT * FROM posts WHERE id = :postId")
+    fun getPostById(postId: Int): PostEntity?
 
-    @Query("DELETE FROM post_entity")
+    @Query("DELETE FROM posts")
     fun deleteAllPosts()
 }

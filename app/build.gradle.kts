@@ -40,6 +40,7 @@ android {
 
 dependencies {
     //  Modules
+    implementation(project(":features:postdetail"))
     implementation(project(":features:posts"))
     implementation(project(":data"))
     implementation(project(":domain"))

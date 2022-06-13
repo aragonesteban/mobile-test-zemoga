@@ -5,7 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.zemoga.domain.model.PostItem
 
-@Entity(tableName = "post_entity")
+@Entity(tableName = "posts")
 data class PostEntity(
     @PrimaryKey val id: Int,
     @ColumnInfo(name = "user_id") val userId: Int,

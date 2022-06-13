@@ -30,7 +30,12 @@ class PostsRepositoryImpl(
 
     override suspend fun getPostById(postId: Int): ZemogaResult<PostItem> {
         return withContext(Dispatchers.IO) {
-            remotePosts.getPostById(postId)
+            val postItem = localPosts.getPostById(postId)
+            postItem?.let {
+                ZemogaResult.Success(postItem)
+            } ?: run {
+                remotePosts.getPostById(postId)
+            }
         }
     }
 

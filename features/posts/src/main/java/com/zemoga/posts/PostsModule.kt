@@ -5,7 +5,7 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
-const val POSTS_VIEW_MODEL = "PostsViewModel"
+internal const val POSTS_VIEW_MODEL = "PostsViewModel"
 
 val postsModule = module {
     viewModel(named(POSTS_VIEW_MODEL)) {

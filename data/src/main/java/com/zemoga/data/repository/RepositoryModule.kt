@@ -1,6 +1,8 @@
 package com.zemoga.data.repository
 
+import com.zemoga.data.local.LOCAL_COMMENTS
 import com.zemoga.data.local.LOCAL_POSTS
+import com.zemoga.data.local.LOCAL_USERS
 import com.zemoga.data.local.POSTS_DAO
 import com.zemoga.data.remote.REMOTE_COMMENTS
 import com.zemoga.data.remote.REMOTE_POSTS
@@ -24,11 +26,17 @@ val repositoryModule = module {
     }
 
     factory<UsersRepository>(named(USERS_REPOSITORY)) {
-        UsersRepositoryImpl(get(named(REMOTE_USERS)))
+        UsersRepositoryImpl(
+            get(named(LOCAL_USERS)),
+            get(named(REMOTE_USERS))
+        )
     }
 
     factory<CommentsRepository>(named(COMMENTS_REPOSITORY)) {
-        CommentsRepositoryImpl(get(named(REMOTE_COMMENTS)))
+        CommentsRepositoryImpl(
+            get(named(LOCAL_COMMENTS)),
+            get(named(REMOTE_COMMENTS))
+        )
     }
 
 }

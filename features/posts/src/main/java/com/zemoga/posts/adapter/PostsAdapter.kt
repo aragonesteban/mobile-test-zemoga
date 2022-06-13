@@ -7,7 +7,9 @@ import androidx.recyclerview.widget.ListAdapter
 import com.zemoga.domain.model.PostItem
 import com.zemoga.posts.databinding.ItemPostBinding
 
-class PostsAdapter : ListAdapter<PostItem, PostsViewHolder>(PostItemDiffCallback()) {
+class PostsAdapter(
+    private val onPostItemClick: (PostItem) -> Unit
+) : ListAdapter<PostItem, PostsViewHolder>(PostItemDiffCallback()) {
 
     fun setPostsList(value: List<PostItem>) {
         submitList(value)
@@ -20,7 +22,7 @@ class PostsAdapter : ListAdapter<PostItem, PostsViewHolder>(PostItemDiffCallback
 
     override fun onBindViewHolder(holder: PostsViewHolder, position: Int) {
         val item = getItem(position)
-        holder.bind(item)
+        holder.bind(item, onPostItemClick)
     }
 }
 
