@@ -12,14 +12,15 @@ I created the project follow MVVM architecture suggested by Google and Clean Arc
 The architecture has three main layers:
 
 **data**: In this module it will be everything about datasources like network and cache 
-n\
+
 **domain**: In this module lives everything about bussines logic working with use cases, also is the responsible to get data from data module to send it to the view
-n\
+
 **features**: In this module lives all presentation 
 
-<img width="694" alt="Screen Shot 2022-06-13 at 3 43 18 PM" src="https://user-images.githubusercontent.com/93212523/173441912-2385a199-c923-4ddc-b7bd-5735775fad6a.png">
+![Screen Shot 2022-06-14 at 7 10 28 PM](https://user-images.githubusercontent.com/93212523/173709745-be16eb40-e9fd-4761-aced-37dd56a5dc95.png)
 
 ## Libraries Used:
+
 * [Koin](https://insert-koin.io/)
 * [Room](https://developer.android.com/jetpack/androidx/releases/room)
 * [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) 
