@@ -2,6 +2,14 @@ package com.zemoga.postdetail
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -108,11 +116,32 @@ class PostDetailActivity : AppCompatActivity() {
 
     private fun setDataUserInfo(user: User) {
         binding.apply {
+            userInfo.setContent {
+                Column {
+                    UserInfo(stringResource(R.string.label_title_name), user.name)
+                    UserInfo(stringResource(R.string.label_title_email), user.email)
+                    UserInfo(stringResource(R.string.label_title_phone), user.phone)
+                    UserInfo(stringResource(R.string.label_title_website), user.website)
+                }
+            }
             postDetailUserLoading.toggleVisibility(show = false)
-            postDetailUserName.text = user.name
-            postDetailUserEmail.text = user.email
-            postDetailUserPhone.text = user.phone
-            postDetailUserWebsite.text = user.website
+        }
+    }
+
+    @Composable
+    private fun UserInfo(info: String, value: String) {
+        Row(modifier = Modifier.padding(16.dp, 4.dp)) {
+            Text(
+                text = info,
+                style = MaterialTheme.typography.body1,
+                color = colorResource(id = com.zemoga.shared.R.color.grey_700)
+            )
+            Spacer(Modifier.size(16.dp))
+            Text(
+                text = value,
+                style = MaterialTheme.typography.body1,
+                color = colorResource(id = com.zemoga.shared.R.color.primary)
+            )
         }
     }
 

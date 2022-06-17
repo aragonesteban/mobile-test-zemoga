@@ -1,6 +1,7 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
+    id("kotlin-android")
 }
 
 android {
@@ -35,6 +36,11 @@ android {
 
     buildFeatures {
         viewBinding = true
+        compose = true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.1.1"
     }
 }
 
@@ -48,6 +54,11 @@ dependencies {
     implementation(Koin.core)
     implementation(Koin.android)
     implementation(AndroidX.Lifecycle.runtimeKtx)
+    implementation(AndroidX.compose.runtime)
+    implementation(AndroidX.compose.foundation)
+    implementation(AndroidX.compose.foundation.layout)
+    implementation(AndroidX.compose.ui.tooling)
+    implementation(AndroidX.compose.material)
 
     testImplementation(Libs.Android.archCoreTesting)
     testImplementation(Testing.junit4)
